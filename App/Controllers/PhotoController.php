@@ -68,9 +68,40 @@ class PhotoController extends Controller
         
         // instantiate and use the dompdf class
         $dompdf = new Dompdf();
-        $html = '<h1>Hello World</h1>';
-        $html .= '<h3>'.$_SESSION['pseudo'].'</h3>';
+        // $html = '<h1>Hello World</h1>';
+        // $html .= '<h3>'.$_SESSION['pseudo'].'</h3>';
 
+        // DL fichier pdf apres connexion faite
+        $html = <<<PDF
+        <!DOCTYPE html>
+        <html lang="fr">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document PDF</title>
+
+            <style>
+                table, tr, th, td {
+                    border: 1px solid black;
+                }
+            </style>
+        </head>
+        <body>
+        
+        <h1>Hello World</h1>
+        <h3>{$_SESSION['pseudo']}</h3>
+        <br>
+        <table>
+        <tr><th>numero</th><th>message</th></tr>
+        PDF;
+        
+        $html .= <<<PDF
+        </table>
+        </body>
+        </html>
+        PDF;
+        
         $dompdf->loadHtml($html);
 
         // (Optional) Setup the paper size and orientation

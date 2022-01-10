@@ -84,6 +84,17 @@ class Dao
         return $photos;
     }
 
+    public function selectAllPhotoByIdUser($idUser)
+    {
+        $sql = 'SELECT * FROM photo WHERE id_user =:id_user';
+        $photoStat = $this->dbConnect->prepare($sql);
+        $photoStat->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'App\Entities\Photo');
+        $photoStat->bindParam(':id_user', $idUser);
+        $photoStat->execute();
+        $photos = $photoStat->fetchAll();
+        return $photos;
+    }
+
     public function selectPhoto($id)
     {
         $sql = 'SELECT * FROM photo NATURAL JOIN user WHERE id_photo=:id';

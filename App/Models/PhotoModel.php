@@ -35,6 +35,13 @@ class PhotoModel {
 
     }
 
+    public function getPhotosByIdUser($idUser)
+    {
+        $dao = new Dao();
+        $listPhoto = $dao->selectAllPhotoByIdUser($idUser);
+        return $listPhoto;
+    }
+
     public function traitLike() : Photo {
 
         $idPhoto = filter_input(INPUT_POST, 'id_photo', FILTER_SANITIZE_NUMBER_INT);
