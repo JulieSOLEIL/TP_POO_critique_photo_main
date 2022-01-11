@@ -10,6 +10,9 @@
             echo '<li class="nav-item active">
               <a class="nav-link" href="index.php?entity=photo&action=create">Poster une image<span class="sr-only">(current)</span></a>
             </li>';
+            echo '<li class="nav-item">
+              <a class="nav-link" href="index.php?entity=photo&action=listperso">Voir vos photos<span class="sr-only">(current)</span></a>
+            </li>';
         }
         ?>
     </ul>

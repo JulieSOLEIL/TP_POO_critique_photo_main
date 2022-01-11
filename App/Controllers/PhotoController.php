@@ -30,6 +30,14 @@ class PhotoController extends Controller
         $this->render('Photo/list', $param);
     }
 
+    public function listperso()
+    {
+        $model = new PhotoModel();
+        $photos = $model->listPhotosByIdUser($_SESSION['idUser']);
+        $param = ['photos' => $photos];
+        $this->render('Photo/listPerso', $param);
+    }
+
     public function show()
     {
         $idPhoto = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
@@ -59,6 +67,24 @@ class PhotoController extends Controller
         header('Content-type: application/json');
         echo json_encode($response);
     }
+
+    public function listphotopdf()
+    {
+        $model = new PhotoModel();
+        $photos = $model->listPhotosByIdUser($_SESSION['idUser']);
+        $param = ['photos' => $photos];
+        $html = $this->renderHtml('App/Views/Photo/listPersoPdf', $param);
+        
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+
+        $dompdf->setPaper('A4', 'landscape');
+
+        $dompdf->render();
+
+        $dompdf->stream();
+    }
+
     public function createpdf()
     {
 

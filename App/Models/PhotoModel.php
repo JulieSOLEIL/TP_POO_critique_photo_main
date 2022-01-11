@@ -35,7 +35,7 @@ class PhotoModel {
 
     }
 
-    public function getPhotosByIdUser($idUser)
+    public function listPhotosByIdUser($idUser)
     {
         $dao = new Dao();
         $listPhoto = $dao->selectAllPhotoByIdUser($idUser);
